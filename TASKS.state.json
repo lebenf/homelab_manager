@@ -85,6 +85,18 @@
       "attempts": 1,
       "error": null,
       "completed_at": "2026-07-09T15:50:28+00:00"
+    },
+    "Write_install.sh_per-app_lifecycle_template": {
+      "status": "completed",
+      "attempts": 1,
+      "error": null,
+      "completed_at": "2026-07-09T15:58:19+00:00"
+    },
+    "Write_update.sh_per-app_lifecycle_template": {
+      "status": "failed",
+      "attempts": 1,
+      "error": "max_iterations (15) reached without task_complete",
+      "completed_at": null
     }
   }
 }
