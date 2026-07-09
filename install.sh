@@ -91,4 +91,48 @@ check_ports() {
 check_prerequisites
 check_ports
 
+# Interactive configuration helper
+ask() {
+  local prompt="$1"
+  local varname="$2"
+
+  # Return immediately if non-interactive or variable already set
+  [ "$NON_INTERACTIVE" = "1" ] && return 0
+  [ -n "${!varname:-}" ] && return 0
+
+  # Read from stdin
+  read -rp "$prompt: " value
+  eval "$varname=\$value"
+}
+
+# Prompt for required configuration values
+ask "Base domain (e.g. example.com)" BASE_DOMAIN
+ask "Let's Encrypt account email" ACME_EMAIL
+ask "Server name" SERVER_NAME
+ask "Backup destination (leave empty to configure later)" BACKUP_DEST
+
+# Validate required fields in non-interactive mode
+if [ "$NON_INTERACTIVE" = "1" ]; then
+  missing_flags=()
+  if [ -z "$BASE_DOMAIN" ]; then
+    missing_flags+=("--base-domain")
+  fi
+  if [ -z "$ACME_EMAIL" ]; then
+    missing_flags+=("--acme-email")
+  fi
+  if [ -z "$SERVER_NAME" ]; then
+    missing_flags+=("--server-name")
+  fi
+
+  if [ ${#missing_flags[@]} -gt 0 ]; then
+    echo "Missing required flags in non-interactive mode: ${missing_flags[*]}" >&2
+    exit 1
+  fi
+fi
+
+# Default backup destination if empty
+if [ -z "$BACKUP_DEST" ]; then
+  BACKUP_DEST="(non configurata)"
+fi
+
 echo "Target directory: $TARGET_DIR"
