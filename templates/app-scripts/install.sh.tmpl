@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+[ -f "$SCRIPT_DIR/../../../infra/.env" ] && set -a && source "$SCRIPT_DIR/../../../infra/.env" && set +a
+ENGINE="${CONTAINER_ENGINE:-podman}"
+COMPOSE_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/docker-compose.yml"
+
+# If the app needs a database, create it first
+if [[ -f "$SCRIPT_DIR/../.needs-db" ]]; then
+  "../../../infra/scripts/new-db.sh" __APP_NAME__
+fi
+
+# Pull and start the app
+"$ENGINE" compose -f "$COMPOSE_FILE" pull
+"$ENGINE" compose -f "$COMPOSE_FILE" up -d --build
+
+# Verify the app is running
+OUTPUT=$("$ENGINE" compose -f "$COMPOSE_FILE" ps)
+if ! echo "$OUTPUT" | grep -q "Up\|running"; then
+  echo "Error: App is not running" >&2
+  exit 1
+fi

@@ -79,6 +79,12 @@
       "attempts": 1,
       "error": null,
       "completed_at": "2026-07-09T15:40:27+00:00"
+    },
+    "Write_simple_per-app_lifecycle_templates": {
+      "status": "completed",
+      "attempts": 1,
+      "error": null,
+      "completed_at": "2026-07-09T15:50:28+00:00"
     }
   }
 }
