@@ -19,6 +19,12 @@
       "attempts": 1,
       "error": null,
       "completed_at": "2026-07-09T09:22:05+00:00"
+    },
+    "Write_the_canonical_CLAUDE.md": {
+      "status": "completed",
+      "attempts": 1,
+      "error": null,
+      "completed_at": "2026-07-09T09:25:28+00:00"
     }
   }
 }
