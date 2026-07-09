@@ -55,4 +55,40 @@ while [ $# -gt 0 ]; do
   esac
 done
 
+# Check prerequisites
+check_prerequisites() {
+  if [ -z "$RUNTIME" ]; then
+    echo "Missing --runtime (podman|docker)" >&2
+    exit 1
+  fi
+
+  local missing_tools=()
+  for tool in git curl "$RUNTIME"; do
+    if ! command -v "$tool" >/dev/null 2>&1; then
+      missing_tools+=("$tool")
+    fi
+  done
+
+  if [ ${#missing_tools[@]} -gt 0 ]; then
+    echo "Missing required tools: ${missing_tools[*]}" >&2
+    exit 1
+  fi
+}
+
+# Check ports
+check_ports() {
+  for port in 80 443; do
+    if command -v ss >/dev/null 2>&1; then
+      if ss -ltn 2>/dev/null | grep -qE "LISTEN.*:$port([^0-9]|$)"; then
+        echo "Port $port is already in use." >&2
+        exit 1
+      fi
+    fi
+  done
+}
+
+# Run checks
+check_prerequisites
+check_ports
+
 echo "Target directory: $TARGET_DIR"
