@@ -93,10 +93,10 @@
       "completed_at": "2026-07-09T15:58:19+00:00"
     },
     "Write_update.sh_per-app_lifecycle_template": {
-      "status": "failed",
-      "attempts": 1,
-      "error": "max_iterations (15) reached without task_complete",
-      "completed_at": null
+      "status": "completed",
+      "attempts": 2,
+      "error": null,
+      "completed_at": "2026-07-09T16:37:33+00:00"
     }
   }
 }
