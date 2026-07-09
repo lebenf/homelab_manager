@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+[ -f "$SCRIPT_DIR/../../../infra/.env" ] && set -a && source "$SCRIPT_DIR/../../../infra/.env" && set +a
+ENGINE="${CONTAINER_ENGINE:-podman}"
+COMPOSE_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/docker-compose.yml"
+
+"$ENGINE" compose -f "$COMPOSE_FILE" stop
