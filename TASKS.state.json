@@ -103,6 +103,12 @@
       "attempts": 1,
       "error": null,
       "completed_at": "2026-07-09T16:41:08+00:00"
+    },
+    "Write_remove.sh_per-app_lifecycle_template": {
+      "status": "completed",
+      "attempts": 1,
+      "error": null,
+      "completed_at": "2026-07-09T16:49:16+00:00"
     }
   }
 }
