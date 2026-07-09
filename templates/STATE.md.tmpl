@@ -1,0 +1,32 @@
+## Server
+
+__SERVER_NAME__.
+
+## Rete
+
+Network `homelab_net`, driver `bridge`, definita in `infra/core-compose.yml`.
+Ogni file compose di un'applicazione deve dichiararla come `external: true`.
+
+## Reverse proxy
+
+Traefik, discovery tramite provider `docker`, certresolvers `le-staging` e `le-prod`,
+base domain `__BASE_DOMAIN__`, convenzione dominio app: `<app>.<base-domain>`.
+
+## Servizi condivisi
+
+- **postgres**: Postgres 16, host `postgres`, porta `5432`, credenziali tramite `infra/scripts/new-db.sh` (mai in questo file).
+- **redis**: Redis 7, host `redis`, porta `6379`, namespacing tramite `infra/scripts/new-redis-ns.sh`.
+
+## Backup
+
+Destinazione primaria: `__BACKUP_DESTINATION__`.
+
+## Runtime
+
+Runtime in uso: `__CONTAINER_ENGINE__`.
+
+## App registrate
+
+| Nome | Path | Dominio | DB dedicato | Backup |
+|---|---|---|---|---|
+<!-- APPS_TABLE_ROWS -->
