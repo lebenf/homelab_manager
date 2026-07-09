@@ -14,5 +14,30 @@ services:
     networks:
       - homelab_net
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - homelab_net
+
+  traefik:
+    image: traefik:v3.1
+    container_name: traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./traefik/traefik.yml:/etc/traefik/traefik.yml:ro"
+      - "./traefik/acme.json:/acme.json"
+      - "./traefik/acme-staging.json:/acme-staging.json"
+      - "__CONTAINER_SOCKET__:/var/run/docker.sock:ro"
+    networks:
+      - homelab_net
+
 volumes:
   postgres_data:
+  redis_data:

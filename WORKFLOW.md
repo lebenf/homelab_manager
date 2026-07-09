@@ -3,7 +3,7 @@ agent:
   max_retries: 3
   retry_delay_s: 10
   turn_timeout_s: 600
-  max_iterations: 35
+  max_iterations: 15
   skip_preflight: false
   context_compaction: compact
 
