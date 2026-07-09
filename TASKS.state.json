@@ -49,6 +49,12 @@
       "attempts": 1,
       "error": null,
       "completed_at": "2026-07-09T14:57:50+00:00"
+    },
+    "Write_scripts_new-db.sh": {
+      "status": "completed",
+      "attempts": 1,
+      "error": null,
+      "completed_at": "2026-07-09T15:02:31+00:00"
     }
   }
 }
