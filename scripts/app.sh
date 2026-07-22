@@ -16,7 +16,7 @@ APP_NAME="$1"
 ACTION="$2"
 shift 2
 
-ACTION_SCRIPT="$SCRIPT_DIR/../apps/$APP_NAME/scripts/$ACTION.sh"
+ACTION_SCRIPT="$SCRIPT_DIR/../../apps/$APP_NAME/scripts/$ACTION.sh"
 
 if [[ ! -f "$ACTION_SCRIPT" ]]; then
   echo "Error: No $ACTION script found for app '$APP_NAME' at $ACTION_SCRIPT" >&2
