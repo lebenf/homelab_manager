@@ -22,7 +22,7 @@ while IFS= read -r -d '' file; do
         # Set environment variables needed for template validation
         export POSTGRES_ROOT_PASSWORD="${POSTGRES_ROOT_PASSWORD:-placeholder-password}"
         export CONTAINER_SOCKET="${CONTAINER_SOCKET:-/var/run/docker.sock}"
-        if ! "${CONTAINER_ENGINE:-podman}" compose -f "$tmpfile" config --quiet 2>/dev/null; then
+        if ! "${CONTAINER_ENGINE:-podman}" compose -f "$tmpfile" config >/dev/null 2>&1; then
             echo "Compose validation error in: $file"
             rm -f "$tmpfile"
             fail=1
@@ -32,7 +32,7 @@ while IFS= read -r -d '' file; do
         # Set environment variables needed for template validation
         export POSTGRES_ROOT_PASSWORD="${POSTGRES_ROOT_PASSWORD:-placeholder-password}"
         export CONTAINER_SOCKET="${CONTAINER_SOCKET:-/var/run/docker.sock}"
-        if ! "${CONTAINER_ENGINE:-podman}" compose -f "$file" config --quiet 2>/dev/null; then
+        if ! "${CONTAINER_ENGINE:-podman}" compose -f "$file" config >/dev/null 2>&1; then
             echo "Compose validation error in: $file"
             fail=1
         fi
