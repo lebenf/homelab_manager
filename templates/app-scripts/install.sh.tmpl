@@ -8,7 +8,7 @@ COMPOSE_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/docker-compose.ym
 
 # If the app needs a database, create it first
 if [[ -f "$SCRIPT_DIR/../.needs-db" ]]; then
-  "../../../infra/scripts/new-db.sh" __APP_NAME__
+  "$SCRIPT_DIR/../../../infra/scripts/new-db.sh" __APP_NAME__
 fi
 
 # Pull and start the app
